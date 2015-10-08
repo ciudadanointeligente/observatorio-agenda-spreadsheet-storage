@@ -1,4 +1,4 @@
-# observatorio-news-spreadsheet-storage
+# observatorio-agenda-spreadsheet-storage
 This is a data storage for [Observatorio anti corrupción](https://github.com/ciudadanointeligente/observatorio) that runs on [Morph](https://morph.io). To get started [see the documentation](https://morph.io/documentation)
 
 ## Deploy & Installation
