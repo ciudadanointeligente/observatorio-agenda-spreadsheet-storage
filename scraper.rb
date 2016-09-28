@@ -16,23 +16,26 @@ end
 # Builds records
 content.shift
 content.each do |row|
+  d,m,y = row[1].split '/'
 
-  record = {
-    "id" => row[0],
-    "date" => row[1],
-    "startDate" => row[2],
-    "endDate" => row[3],
-    "title" => row[4],
-    "summary" => row[5],
-    "last_update" => Date.today.to_s
-  }
+  if( Date.valid_date? y.to_i, m.to_i, d.to_i )
+    record = {
+      "id" => row[0].to_i,
+      "date" => row[1],
+      "startDate" => row[2],
+      "endDate" => row[3],
+      "title" => row[4],
+      "summary" => row[5],
+      "last_update" => Date.today.to_s
+    }
 
-  # Storage the record
-  if ((ScraperWiki.select("* from data where `source`='#{record['id']}'").empty?) rescue true)
-    ScraperWiki.save_sqlite(["id"], record)
-    puts "Adds new record " + record['id']
-  else
-    ScraperWiki.save_sqlite(["id"], record)
-    puts "Updating already saved record " + record['id']
+    # Storage the record
+    if ((ScraperWiki.select("* from data where `source`='#{record['id']}'").empty?) rescue true)
+      ScraperWiki.save_sqlite(["id"], record)
+      puts "Adds new record " + record['id'].to_s
+    else
+      ScraperWiki.save_sqlite(["id"], record)
+      puts "Updating already saved record " + record['id'].to_s
+    end
   end
 end
